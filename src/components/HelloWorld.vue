@@ -87,6 +87,8 @@
 </template>
 
 <script>
+import restApi from '@/api/test'
+
 export default {
   name: "HelloWorld",
   props: {
