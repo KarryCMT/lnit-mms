@@ -6,7 +6,7 @@ import router from "./router";
 
 Vue.use(ElementUI);
 Vue.config.productionTip = process.env.NODE_ENV === 'production';
-console.log(process.env.NODE_ENV);
+console.log(process.env.VUE_APP_SERVICE_URL);
 new Vue({
   router,
   render: h => h(App)

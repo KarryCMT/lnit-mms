@@ -5,13 +5,13 @@ module.exports = {
         https:false,//协议
         open:true,//启动服务时自动打开浏览器访问
         proxy:{//开发环境代理配置
-            '/dev-api':{
+            [process.env.VUE_APP_BASE_API]:{
                 //目标服务器地址 代理访问
-                target:'http://mengxuegu.com:7300/mock/5db6c4bb2aa750460d4fcec3',
+                target:process.env.VUE_APP_SERVICE_URL,
                 changeOrigin:true,//开启代理服务器
                 pathRewrite:{
                     // /dev-api/db.json 最终会发送http://localhost:8001/db.json
-                    '^/dev-api':'',
+                    ['^' + process.env.VUE_APP_BASE_API]:'',
                 }
             }
         }
