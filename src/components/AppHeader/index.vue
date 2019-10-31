@@ -16,10 +16,38 @@
   </div>
 </template>
 <script>
+import {logout} from '@/api/login'
 export default {
     methods:{
          handleCommand(command){
-             this.message(`点击了${command}`)
+             switch (command) {
+               case 'a':
+                 //修改密码
+                 this.$message(`点击修改密码`)
+                 break;
+               case 'b':
+                 //退出系统
+                
+                 logout(localStorage.getItem('lengnuanit-msm-token')).then(response =>{
+                   const resp = response.data
+                   if(resp.flag){
+                     //退出成功
+                     //清除本地数据
+                     localStorage.removeItem('lengnuanit-msm-token'),
+                     localStorage.removeItem('lengnuanit-msm-user')
+                     this.$router.push('/login')
+                   }else{
+                     this.$message({
+                       message:resp.message,
+                       type:'warning',
+                       duration:500 //弹出停留时间
+                     })
+                   }
+                 })
+                  break;
+               default:
+                  break;
+             }
          }
     }
 }

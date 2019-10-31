@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
     <el-menu
-      :router="ture"
+      router
       default-active="/"
       class="el-menu-vertical-demo"
       background-color="#545c64"
@@ -32,17 +32,11 @@
 </template>
 <script>
 export default {
-  data: {
-    methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      }
+  data() {
+    return {
     }
-  }
-};
+  },
+}
 </script>
 <style scoped>
 .navbar{
@@ -70,8 +64,6 @@ export default {
       width: 229px;
       height: 671px;
 }
-.el-menu{
-  border-right: none;
-}
+
 </style>
       
