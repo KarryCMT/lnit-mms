@@ -10,7 +10,8 @@
         ref="form"
         class="demo-ruleForm login-page"
       >
-        <h3 class="title">冷暖IT会员管理系统</h3>
+      <h1><a href="#" class="Logo"><img src="../../assets/Logo.png" alt="" ></a></h1>
+        <!-- <h3 class="title">冷暖IT会员管理系统</h3> -->
         <el-form-item prop="username">
           <el-input type="text" v-model="form.username" auto-complete="off" placeholder="用户名"></el-input>
         </el-form-item>
@@ -89,6 +90,11 @@ export default {
    }
 </script>
 <style scoped>
+.Logo img{
+    display: block;
+    margin: 0 auto;
+    width: 150px;
+}
 #Login {
   width: 100%;
   height: 100%;
@@ -112,7 +118,7 @@ export default {
   width: 350px;
   height: 310px;
   padding: 35px 35px 15px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.3);
   border: 1px solid #eaeaea;
   box-shadow: 0 0 25px #cac6c6;
 }
