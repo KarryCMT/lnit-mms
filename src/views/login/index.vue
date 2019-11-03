@@ -10,21 +10,20 @@
         ref="form"
         class="demo-ruleForm login-page"
       >
-      <h1><a href="#" class="Logo"><img src="../../assets/Logo.png" alt="" ></a></h1>
+        <h1>
+          <a href="#" class="Logo">
+            <img src="../../assets/Logo.png" alt />
+          </a>
+        </h1>
         <!-- <h3 class="title">冷暖IT会员管理系统</h3> -->
         <el-form-item prop="username">
           <el-input type="text" v-model="form.username" auto-complete="off" placeholder="用户名"></el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input
-            type="password"
-            v-model="form.password"
-            auto-complete="off"
-            placeholder="密码"
-          ></el-input>
+          <el-input type="password" v-model="form.password" auto-complete="off" placeholder="密码"></el-input>
         </el-form-item>
         <el-form-item style="width:100%;">
-          <el-button type="primary" style="width:100%;" @click="submitForm('form')" >登录</el-button>
+          <el-button type="primary" style="width:100%;" @click="submitForm('form')">登录</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -51,49 +50,45 @@ export default {
     }
   },
   methods: {
-    submitForm(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-            //提交表单给后台进行验证是否正确
-            login(this.form.username,this.form.password).then(response => {
-                const resp = response.data
-                console.log(resp,resp.flag)
-                if(resp.flag){
-                    //验证成功，通过token去获取用户信息
-                    getUserInfo(resp.data.token)
-                    const respUser = response.data
-                    if(respUser.flag){
-                        //获取到了用户的数据
-                        console.log('userInfo',respUser.data)
-                        // 1.保存token，用户信息
-                        localStorage.setItem('lengnuanit-msm-user',JSON.stringify(respUser.data))
-                        localStorage.setItem('lengnuanit-msm-token',resp.data.token)
-                        // 2.前往首页
-                        this.$router.push('/')
-                    }else{
-                        // 未通过,弹出警告
-                        this.$message({
-                        message: respUser.message,
-                        type: 'warning'
-                    });
-                    }
-                } 
+          submitForm(formName){
+            this.$refs[formName].validate(valid => {
+              if (valid) {
+                login(this.form.username,this.form.password).then(response =>{
+                  const resp = response.data
+                  if (resp.flag) {
+                      getUserInfo(resp.data.token).then(response =>{
+                        const respUser = response.data
+                        if (respUser.flag) {
+                          localStorage.setItem('lengnuanit-msm-user',JSON.stringify(respUser.data))
+                          localStorage.setItem('lengnuanit-msm-token',resp.data.token)
+                          this.$router.push('/')
+                        }else{
+                           this.$message({
+                            message:respUser.message,
+                            type:'warning'
+                            });
+                        }
+                      })
+                  }else{
+                    this.$message({
+                      message:resp.message,
+                      type:'warning'
+                    })
+                  }
+                })
+              }else{
+                return false
+              }
             })
-          }else{
-           
-            // alert(resp.message)
-             
-          } 
-        })
-        } 
-      }
+          }
+        }
    }
 </script>
 <style scoped>
-.Logo img{
-    display: block;
-    margin: 0 auto;
-    width: 150px;
+.Logo img {
+  display: block;
+  margin: 0 auto;
+  width: 150px;
 }
 #Login {
   width: 100%;
@@ -129,5 +124,4 @@ label.el-checkbox.rememberme {
 .title {
   text-align: center;
 }
-</style>
-    
+</style>  

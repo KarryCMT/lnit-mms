@@ -211,7 +211,7 @@ export default {
                 type: "warning"
               });
             }
-          });
+          })
         } else {
           return false;
         }

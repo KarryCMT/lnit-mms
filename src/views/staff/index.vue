@@ -208,6 +208,10 @@ export default {
               //新增成功，刷新列表数据
               this.fetchData();
               this.dialogFormVisible = false;
+              this.$message({
+                message:'新增成功，初始密码为：123456',
+                type: "success"
+              });
             } else {
               //失败 提示
               this.$message({

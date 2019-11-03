@@ -29,7 +29,7 @@
     </el-form>
     <!-- 数据列表 -->
     <el-table 
-    :highlight-current-row="isDialog" @current-change="clickCurrentChange" :data="list" height="485" border style="width: 100%">
+      :highlight-current-row="isDialog" @current-change="clickCurrentChange" :data="list" height="485" border style="width: 100%">
       <el-table-column type="index" label="序号" width="60px"></el-table-column>
       <el-table-column prop="name" label="供应商名称"></el-table-column>
       <el-table-column prop="linkman" label="联系人"></el-table-column>
